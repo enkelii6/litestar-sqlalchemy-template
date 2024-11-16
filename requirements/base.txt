@@ -1,0 +1,7 @@
+litestar[standard]
+pydantic-settings
+pydantic
+uvicorn
+sqlalchemy[asyncpg]
+advanced-alchemy
+asyncpg

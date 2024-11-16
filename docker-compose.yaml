@@ -1,0 +1,27 @@
+x-common-variables: &common-variables
+  DATABASE_URL: postgresql+asyncpg://postgres:postgres@db:5432/postgres
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+    environment:
+      <<: *common-variables
+    ports:
+      - "8008:8000"
+    volumes:
+      - .:/app
+    command: ["python", "-m", "src.app"]
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    ports:
+      - "5555:5432"
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres"]
