@@ -5,7 +5,6 @@ from litestar.plugins.sqlalchemy import SQLAlchemyAsyncConfig, SQLAlchemyInitPlu
 from src.config import settings
 from src.routes import routes
 
-
 db_config = SQLAlchemyAsyncConfig(connection_string=str(settings.database_url))
 
 app = Litestar(
